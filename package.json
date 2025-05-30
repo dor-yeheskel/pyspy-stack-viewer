@@ -1,0 +1,111 @@
+{
+  "name": "pyspy-stack-viewer",
+  "displayName": "PySpy Stack Viewer",
+  "homepage": "https://github.com/dor-yeheskel/pyspy-stack-viewer",
+  "icon": "media/logo.png",
+  "description": "View live Python stack traces in VS Code",
+  "version": "0.0.1",
+  "publisher": "dor-yeheskel",
+  "engines": {
+    "vscode": "^1.72.0"
+  },
+  "categories": [
+    "Other",
+    "Debuggers"
+  ],
+  "keywords": [
+    "py-spy",
+    "python",
+    "stack",
+    "stack trace",
+    "traceback",
+    "debug",
+    "live stack",
+    "refresh",
+    "click to code",
+    "performance",
+    "profiler",
+    "process",
+    "running process",
+    "stack viewer",
+    "tree view"
+  ],
+  "activationEvents": [
+    "onView:pyspy.view",
+    "onCommand:pyspy.pickProcess",
+    "onCommand:pyspy.refreshTrace",
+    "onCommand:pyspy.toggleOrder",
+    "onCommand:pyspy.openFrame"
+  ],
+  "main": "./out/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dor-yeheskel/pyspy-stack-viewer"
+  },
+  "bugs": {
+    "url": "https://github.com/dor-yeheskel/pyspy-stack-viewer/issues"
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pyspy",
+          "title": "PySpy Stack Viewer",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "pyspy": [
+        {
+          "id": "pyspy.view",
+          "name": "PySpy Stack Viewer"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "pyspy.pickProcess",
+        "title": "Attach to Process",
+        "icon": "$(search-editor-label-icon)"
+      },
+      {
+        "command": "pyspy.refreshTrace",
+        "title": "Refresh Trace",
+        "icon": "$(search-refresh)"
+      },
+      {
+        "command": "pyspy.toggleOrder",
+        "title": "Toggle Frame Order",
+        "icon": "$(arrow-swap)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "pyspy.pickProcess",
+          "when": "view == pyspy.view",
+          "group": "navigation"
+        },
+        {
+          "command": "pyspy.refreshTrace",
+          "when": "view == pyspy.view",
+          "group": "navigation"
+        },
+        {
+          "command": "pyspy.toggleOrder",
+          "when": "view == pyspy.view",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.25",
+    "@types/vscode": "^1.72.0",
+    "typescript": "^5.4.5"
+  }
+}
