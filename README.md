@@ -1,5 +1,8 @@
 # PySpy Stack Viewer – “Where’s my Python process right now?”
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![open source](https://img.shields.io/badge/open%20source-yes-brightgreen.svg)](https://github.com/dor-yeheskel/pyspy-stack-viewer)
+
 A simple VS Code extension to instantly locate your Python process and see a live stack trace inside the editor.
 
 <div align="center">
