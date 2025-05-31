@@ -6,7 +6,6 @@ dist
 .vscode/*
 
 # Files
-package-lock.json
 todo.txt
 output.txt
 vsc-extension-quickstart.md
