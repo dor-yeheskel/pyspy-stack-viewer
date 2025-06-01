@@ -5,7 +5,7 @@
 
 A simple VS Code extension to instantly locate your Python process and see a live stack trace inside the editor.
 
-<div align="center">
+<div align="center" style="margin-bottom: 2rem">
   <img src="media/docs/demo.gif" width="660"/>
   <br/>
   <sub><i>▶ Demo: One-click stack trace viewer in VS Code</i></sub>

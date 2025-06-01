@@ -76,18 +76,31 @@ export async function ensurePySpy(storageDir: string): Promise<string> {
   return local;
 }
 
-/* ---------- 3. Run py-spy dump ---------- */
+/* ---------- 3. Run py-spy dump (with fallback) ---------- */
 
 export function runPySpyDump(pySpyPath: string, pid: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    execFile(
-      pySpyPath,
-      ['dump', '--pid', pid, '--full-filenames'],
-      { env: { PYSPY_ALLOW_LOWER_PERMS: '1' } },
-      (err, stdout, stderr) =>
-        err ? reject(stderr || err.message) : resolve(stdout)
-    );
-  });
+  const argsBase = ['--pid', pid, '--full-filenames'];
+
+  // helper to actually invoke py-spy
+  const execDump = (extra: string[]) =>
+    new Promise<string>((resolve, reject) => {
+      execFile(
+        pySpyPath,
+        ['dump', ...extra, ...argsBase],
+        { env: { PYSPY_ALLOW_LOWER_PERMS: '1' } },
+        (err, stdout, stderr) => (err ? reject(stderr || err) : resolve(stdout))
+      );
+    });
+
+  // first try the regular (SIGSTOP) mode
+  return execDump([])
+    .catch((err: any) => {
+      // if EPERM / permission problem → fallback to --nonblocking
+      if (/EPERM|Operation not permitted|perm/i.test(err.toString())) {
+        return execDump(['--nonblocking']);
+      }
+      throw err;
+    });
 }
 
 /* ---------- 4. Open file helper ---------- */
