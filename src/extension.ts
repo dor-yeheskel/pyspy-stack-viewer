@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { ensurePySpy, runPySpyDump, openFileAtLine } from './utils';
 import { StackProvider, Frame } from './stackProvider';
+import * as fs from 'fs';
 import { exec } from 'child_process';
 
 const log = vscode.window.createOutputChannel('PySpy Stack Log');
@@ -84,6 +85,23 @@ export async function activate(context: vscode.ExtensionContext) {
             if (m) { pid = m[1]; cmdLine = m[2]; }
           }
 
+          /* -------- Linux UID filter -------- */
+          if (process.platform === 'linux' && pid) {
+            try {
+              const s = fs.readFileSync(`/proc/${pid}/status`, 'utf8');
+              const m = s.match(/^Uid:\s+(\d+)/m);
+              if (
+                m &&
+                typeof process.getuid === 'function' &&
+                Number(m[1]) !== process.getuid()
+               ) {
+                pid = undefined;
+              }
+            } catch {
+              pid = undefined;
+            }
+          }
+          
           /* keep only python-ish processes ----------------------------------- */
           const PY_RE =
             /(?:^|[\\/\s"])(python(?:3|w)?(?:\.exe)?|py(?:\.exe)?)(?=$|[\\/\s"])/i;
