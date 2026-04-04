@@ -37,7 +37,7 @@ export async function getPythonInterpreterPath(): Promise<string> {
 
 /* ---------- 2. Ensure py-spy ---------- */
 
-const PYSPY_VERSION = '0.4.0';
+const PYSPY_VERSION = '0.4.1';
 
 function locateLocalPySpy(dir: string): string | undefined {
   const names =
