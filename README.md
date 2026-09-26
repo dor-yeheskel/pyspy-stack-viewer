@@ -21,6 +21,11 @@ A simple VS Code extension to instantly locate your Python process and see a liv
 
 ---
 
+## Demo:
+https://www.youtube.com/watch?v=6YkjBB_8QjU
+
+---
+
 ## Why you might need it 🤕
 
 * **The Pain**  
