@@ -21,8 +21,8 @@ A simple VS Code extension to instantly locate your Python process and see a liv
 
 ---
 
-### Marketplace Link: https://marketplace.visualstudio.com/items?itemName=dor-yeheskel.pyspy-stack-viewer
-### Demo: https://www.youtube.com/watch?v=6YkjBB_8QjU
+### [Marketplace Link](https://marketplace.visualstudio.com/items?itemName=dor-yeheskel.pyspy-stack-viewer)
+### [Demo](https://www.youtube.com/watch?v=6YkjBB_8QjU)
 
 ---
 
